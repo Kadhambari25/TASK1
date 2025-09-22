@@ -1,0 +1,40 @@
+CREATE TABLE CUSTOMER (
+    Cust_ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Phone VARCHAR(15)
+);
+
+CREATE TABLE CAR (
+    Vehicle_ID INT PRIMARY KEY,
+    Year INT,
+    DailyRate DECIMAL(8,2),
+    WeeklyRate DECIMAL(8,2),
+    Type VARCHAR(50),
+    Availability VARCHAR(20),
+    IsAvailable BOOLEAN
+);
+
+CREATE TABLE RENTALS (
+    Rental_No INT PRIMARY KEY,
+    Cust_ID INT,
+    Vehicle_ID INT,
+    Amount_Due DECIMAL(8,2),
+    FOREIGN KEY (Cust_ID) REFERENCES CUSTOMER(Cust_ID),
+    FOREIGN KEY (Vehicle_ID) REFERENCES CAR(Vehicle_ID)
+);
+
+CREATE TABLE DAILY (
+    Rental_No INT PRIMARY KEY,
+    No_Of_Days INT,
+    Start_Date DATE,
+    Return_Date DATE,
+    FOREIGN KEY (Rental_No) REFERENCES RENTALS(Rental_No)
+);
+
+CREATE TABLE WEEKLY (
+    Rental_No INT PRIMARY KEY,
+    No_Of_Days INT,
+    Start_Date DATE,
+    Return_Date DATE,
+    FOREIGN KEY (Rental_No) REFERENCES RENTALS(Rental_No)
+);
